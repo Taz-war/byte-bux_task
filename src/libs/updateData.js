@@ -23,7 +23,7 @@ export const updateData = async (id, data) => {
 export const updateStatus = async (id, update) => {
     try {
         const response = await fetch(`https://byte-bux-backend-1.onrender.com/tasks/${id}`, {
-            method: 'PUT',
+            method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'
             },
