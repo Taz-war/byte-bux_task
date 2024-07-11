@@ -51,6 +51,15 @@ const TaskList = () => {
     };
 
     const handleToggleTaskStatus = async (id) => {
+        Swal.fire({
+            title: "Updating Task",
+            html: "Loading ...",
+            // timer: 2000,
+            timerProgressBar: true,
+            didOpen: () => {
+                Swal.showLoading();
+            },
+        })
         const task = tasks.find((task) => task._id === id);
         if (task) {
             const response = await updateStatus(id, { completed: !task.completed });
@@ -59,6 +68,7 @@ const TaskList = () => {
                 console.log('Task status updated:', response);
             }
         }
+        Swal.close();
     };
 
     const closeModal = () => {
