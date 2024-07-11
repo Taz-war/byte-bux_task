@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Swal from "sweetalert2";
 
 const ModalForm = ({ isOpen, onClose, onSubmit, initialTask }) => {
     const [task, setTask] = useState({ title: '', description: '', completed: false });
@@ -21,9 +22,25 @@ const ModalForm = ({ isOpen, onClose, onSubmit, initialTask }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        onSubmit(task);
-        setTask({ title: '', description: '', completed: false })
-        onClose();
+        let timerInterval;
+        Swal.fire({
+            title: "Adding Task",
+            html: "Loading ...",
+            timer: 2000,
+            timerProgressBar: true,
+            didOpen: () => {
+                Swal.showLoading();
+                onSubmit(task);
+                setTask({ title: '', description: '', completed: false })
+                onClose();
+            },
+            willClose: () => {
+                clearInterval(timerInterval);
+            }
+        }).then((result) => {
+            
+        });
+        
     };
 
     if (!isOpen) return null;
