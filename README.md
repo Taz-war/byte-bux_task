@@ -1,70 +1,138 @@
-# Getting Started with Create React App
+# Task Management Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
 
-## Available Scripts
+This project is a task management application built with a React frontend and an Express/MongoDB backend. Users can add, edit, delete, and toggle the completion status of tasks. The application provides a user-friendly interface for managing tasks efficiently.
 
-In the project directory, you can run:
+## Live Demo
 
-### `npm start`
+- **Frontend**: [Task Management Frontend](https://byte-bux-task.vercel.app/)
+- **Backend**: [Task Management Backend](https://byte-bux-backend-1.onrender.com/)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Features
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- Add new tasks
+- Edit existing tasks
+- Delete tasks
+- Mark tasks as complete or incomplete
+- Real-time updates on task status
 
-### `npm test`
+## Setup and Run the Project Locally
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Prerequisites
 
-### `npm run build`
+- Node.js
+- npm (Node Package Manager)
+- MongoDB (Local or Atlas)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Backend Setup
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. Clone the repository:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```sh
+git clone https://github.com/Taz-war/byte-bux_backend
+cd byte-bux-backend
+```
+2. Install dependencies:
+    npm install
 
-### `npm run eject`
+3. Create a .env file in the root directory and add the following environment variables:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+    DB_USER=fahimtazwer
+    DB_PASS=IB20BPlIqDkbCEIG
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+4. Start the backend server:
+    node index.js
+The backend server will start on http://localhost:5000.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Frontend Setup
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+1. Clone the repository:
+    git clone https://github.com/Taz-war/byte-bux_task
+    cd byte-bux-frontend
 
-## Learn More
+2. Install dependencies:
+    npm install
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+3. Start the frontend development server:
+    npm start
+The frontend will start on http://localhost:3000.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+# API Documentation
 
-### Code Splitting
+### Get All Tasks
+- **URL**: '/tasks'
+- **Method**: 'GET'
+- **Description**: 'GET'
+- **Response**: [
+  {
+    "_id": "task_id",
+    "title": "Task Title",
+    "description": "Task Description",
+    "completed": false
+  },
+  ...
+]
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Create a New Task
 
-### Analyzing the Bundle Size
+- **URL**: '/tasks'
+- **Method**: 'POST'
+- **Description**:  Create a new task.
+- **RequestBody**:{
+  "title": "Task Title",
+  "description": "Task Description",
+  "completed": false
+}
+- **Response**:{
+  "acknowledged": true,
+  "insertedId": "new_task_id"
+}
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Update a Task
 
-### Making a Progressive Web App
+- **URL**: '/tasks/:id'
+- **Method**: 'PUT'
+- **Description**:  Update an existing task.
+- **RequestBody**:{
+  "title": "Updated Title",
+  "description": "Updated Description",
+  "completed": true
+}
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- **Response**:{
+  "matchedCount": 1,
+  "modifiedCount": 1,
+  "upsertedId": null
+}
 
-### Advanced Configuration
+### Update a Status
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- **URL**: '/tasks/:id'
+- **Method**: 'PATCH'
+- **Description**:  Update the completion status of a task.
+- **RequestBody**:{
+  "completed": true
+}
+- **Response**:{
+  "matchedCount": 1,
+  "modifiedCount": 1,
+  "upsertedId": null
+}
 
-### Deployment
+### Delete a Task
+- **URL**: '/tasks/:id'
+- **Method**: 'DELETE'
+- **Description**: Delete a task.
+- **Response**: {
+  "success": true,
+  "message": "Task deleted successfully"
+}
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+# License
 
-### `npm run build` fails to minify
+This project is licensed under the MIT License. See the LICENSE file for details.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+
